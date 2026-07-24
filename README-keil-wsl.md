@@ -39,6 +39,12 @@ sudo apt install ripgrep
 
 在搜索窗口中直接输入即可筛选；`Ctrl-j` / `Ctrl-k` 选择结果，回车打开，`Esc` 取消。默认会遵守 `.gitignore`，也会忽略 `.git` 目录。
 
+## Markdown 终端预览
+
+打开 Markdown 文件会自动启用语法高亮和终端内渲染。标题、列表、引用、任务框与代码块会以更易读的形式显示；按 `<Space>mp` 可在原始 Markdown 与渲染预览之间切换。
+
+首次打开 Markdown 时，Neovim 会下载 `nvim-treesitter` 与 `render-markdown.nvim`，并安装 Markdown 的语法解析器。
+
 ## 让 clangd 理解 Keil 的头文件和宏
 
 最可靠的办法是在**项目根目录**放置 `.clangd`。下面是起点；将 include 目录和宏替换成项目实际使用的值：

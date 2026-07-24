@@ -19,6 +19,23 @@ local lazy_ok, lazy = pcall(require, "lazy")
 if lazy_ok then
   lazy.setup({
     {
+      "nvim-treesitter/nvim-treesitter",
+      -- main 分支现在需要 Neovim 0.12；WSL 的稳定版使用兼容 0.11 的 master。
+      branch = "master",
+      lazy = false,
+      build = ":TSUpdate",
+      opts = {
+        ensure_installed = { "markdown", "markdown_inline" },
+        highlight = { enable = true },
+      },
+      config = function(_, opts)
+        local ok, configs = pcall(require, "nvim-treesitter.configs")
+        if ok then
+          configs.setup(opts)
+        end
+      end,
+    },
+    {
       "nvim-telescope/telescope.nvim",
       tag = "0.1.8",
       dependencies = { "nvim-lua/plenary.nvim" },
@@ -34,6 +51,18 @@ if lazy_ok then
           sorting_strategy = "ascending",
           layout_config = { prompt_position = "top", preview_width = 0.55 },
         },
+      },
+    },
+    {
+      "MeanderingProgrammer/render-markdown.nvim",
+      ft = { "markdown" },
+      dependencies = { "nvim-treesitter/nvim-treesitter" },
+      keys = {
+        { "<leader>mp", "<cmd>RenderMarkdown toggle<cr>", desc = "切换 Markdown 预览" },
+      },
+      opts = {
+        heading = { sign = false },
+        code = { sign = false },
       },
     },
   })
