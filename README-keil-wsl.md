@@ -25,6 +25,20 @@ nvim .
 * `K`：符号说明；`<Space>rn`：重命名
 * `[d`、`]d`：上一条、下一条诊断
 
+## 模糊搜索与全局搜索
+
+* `<Space>ff`：按文件名模糊查找项目文件
+* `<Space>fg`：按文本搜索整个项目（搜索结果可回车打开）
+* `<Space>fb`：模糊查找已打开的文件
+
+首次启动 Neovim 会通过 Git 自动下载 Telescope；需要能访问 GitHub。`<Space>fg` 依赖 `ripgrep`，可用下列命令安装：
+
+```bash
+sudo apt install ripgrep
+```
+
+在搜索窗口中直接输入即可筛选；`Ctrl-j` / `Ctrl-k` 选择结果，回车打开，`Esc` 取消。默认会遵守 `.gitignore`，也会忽略 `.git` 目录。
+
 ## 让 clangd 理解 Keil 的头文件和宏
 
 最可靠的办法是在**项目根目录**放置 `.clangd`。下面是起点；将 include 目录和宏替换成项目实际使用的值：
