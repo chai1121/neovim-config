@@ -4,11 +4,6 @@ local M = {}
 local default_uv4 = "/mnt/e/Keil_v5/UV4/UV4.exe"
 local last_job
 
-local function open_interactive(uv4, root, project_name, target)
-  -- -b 必然在构建后退出；重新以无命令的交互模式打开工程以保留 µVision 窗口。
-  vim.fn.jobstart({ uv4, project_name, "-t", target }, { cwd = root, detach = true })
-end
-
 local function project_file()
   local start = vim.api.nvim_buf_get_name(0)
   local found = vim.fs.find(function(name) return name:match("%.uvprojx$") ~= nil end, { path = start ~= "" and start or vim.fn.getcwd(), upward = true, limit = 1, type = "file" })
@@ -105,9 +100,6 @@ local function run(path, target, action)
       -- UV4 的 1 表示“只有警告”，仍属成功构建。
       local succeeded = exit_code < 2
       vim.notify(succeeded and ("Keil 构建完成：" .. target) or ("Keil 构建失败：" .. target), succeeded and vim.log.levels.INFO or vim.log.levels.ERROR)
-      if succeeded and vim.g.keil_open_after_build ~= false then
-        open_interactive(uv4, root, project_name, target)
-      end
     end,
   })
   last_job = { path = path, target = target, action = action }
