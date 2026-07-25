@@ -17,6 +17,11 @@ map("n", "<leader>e", "<cmd>Neotree toggle left reveal_force_cwd<cr>", vim.tbl_e
 map("n", ".", "<cmd>Neotree toggle left reveal_force_cwd<cr>", vim.tbl_extend("force", opts, { desc = "切换文件树" }))
 map("n", "-", "<cmd>Neotree toggle left reveal_force_cwd<cr>", vim.tbl_extend("force", opts, { desc = "切换文件树" }))
 
+-- Git
+map("n", "<leader>gd", "<cmd>Gitsigns diffthis HEAD<cr>", vim.tbl_extend("force", opts, { desc = "对比当前文件与 HEAD" }))
+map("n", "<leader>gq", "<cmd>diffoff!<cr>", vim.tbl_extend("force", opts, { desc = "关闭 Git diff" }))
+map("n", "<leader>gg", function() require("config.lazygit").toggle() end, vim.tbl_extend("force", opts, { desc = "打开 Lazygit" }))
+
 -- 缓冲区和窗口
 map("n", "<leader>bb", "<cmd>Telescope buffers<cr>", vim.tbl_extend("force", opts, { desc = "切换缓冲区" }))
 map("n", "<leader>bd", "<cmd>bdelete<cr>", vim.tbl_extend("force", opts, { desc = "关闭缓冲区" }))
